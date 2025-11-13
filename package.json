@@ -1,0 +1,18 @@
+{
+  "name": "smartparkingfrontend",
+  "version": "1.0.0",
+  "description": "Smart Parking frontend using React + Parcel",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.16.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^6.23.1"
+  }
+}
