@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-export default function Home({ setIsLoggedIn }) {
+export default function Home() {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  // Redirect to dashboard if already logged in
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
+
   return (
     <div style={containerStyle}>
       <div style={overlayStyle}>
         <h1 style={titleStyle}>Welcome to Smart Parking</h1>
-        <p style={subtitleStyle}>Login or Signup to continue</p>
-
-        <div style={{ marginTop: "20px" }}>
-          <button style={btnStyle} onClick={() => alert("Open login modal")}>
-            Login
-          </button>
-          <button style={btnStyle} onClick={() => alert("Open signup modal")}>
-            Signup
-          </button>
-        </div>
+        <p style={subtitleStyle}>
+          Intelligent parking management system for modern cities
+        </p>
+        <p style={{ fontSize: "1rem", marginTop: "10px", opacity: 0.9 }}>
+          Login or Signup to continue
+        </p>
       </div>
     </div>
   );

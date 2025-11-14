@@ -1,28 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { ParkingProvider } from "./context/ParkingContext";
 import Layout from "./layout/Layout";
-console.log("Layout Error ",Layout)
-import Home from "./pages/Home"
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import EntryPage from "./pages/EntryPage";
 import ExitPage from "./pages/ExitPage";
+import ParkingLotView from "./pages/ParkingLotView";
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
     <Router>
-      <Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
-        <Routes>
-          {/* PUBLIC ROUTE */}
-          <Route path="/" element={<Home setIsLoggedIn={setIsLoggedIn} />} />
+      <AuthProvider>
+        <ParkingProvider>
+          <Layout>
+            <Routes>
+              {/* PUBLIC ROUTE */}
+              <Route path="/" element={<Home />} />
 
-          {/* AFTER LOGIN ROUTES */}
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/entry" element={<EntryPage />} />
-          <Route path="/exit" element={<ExitPage />} />
-        </Routes>
-      </Layout>
+              {/* AFTER LOGIN ROUTES */}
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/entry" element={<EntryPage />} />
+              <Route path="/exit" element={<ExitPage />} />
+              <Route path="/parking-view" element={<ParkingLotView />} />
+            </Routes>
+          </Layout>
+        </ParkingProvider>
+      </AuthProvider>
     </Router>
   );
 }

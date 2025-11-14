@@ -21,6 +21,13 @@ export default function Dashboard() {
       >
         🚗 Exit Vehicle
       </button>
+
+      <button
+        style={btnStyle}
+        onClick={() => navigate("/parking-view")}
+      >
+        🅿️ View Parking Lot
+      </button>
     </div>
   );
 }
