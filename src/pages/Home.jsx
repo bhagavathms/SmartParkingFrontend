@@ -6,7 +6,6 @@ export default function Home() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect to dashboard if already logged in
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/dashboard");
