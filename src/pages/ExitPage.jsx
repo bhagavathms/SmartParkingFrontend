@@ -23,7 +23,6 @@ export default function ExitPage() {
   const [ocrData, setOcrData] = useState(null);
   const [calculatingPrice, setCalculatingPrice] = useState(false);
 
-  // Redirect if not authenticated
   React.useEffect(() => {
     if (!isAuthenticated) {
       navigate("/");
@@ -31,7 +30,6 @@ export default function ExitPage() {
   }, [isAuthenticated, navigate]);
 
   const handleOcrDetection = (data) => {
-    // OcrBox component passes the plate number directly as a string
     const plateNumber = typeof data === 'string' ? data : data?.text;
 
     if (plateNumber) {
@@ -80,14 +78,10 @@ export default function ExitPage() {
   const handleExitVehicle = async () => {
     setError("");
 
-    // Step 1: Exit the vehicle (backend calculates temporary bill)
     const result = await exitVehicle(vehicleRegistration.trim());
 
     if (result.success) {
-      // Use dynamic pricing if available, otherwise use backend's price
       let finalBillAmount = pricingInfo?.adjustedCharge || result.data.billAmt;
-
-      // Step 2: Try to update bill with dynamic pricing if available
       if (pricingInfo && pricingInfo.adjustedCharge) {
         try {
           console.log('Updating bill with dynamic pricing:', {
@@ -106,17 +100,14 @@ export default function ExitPage() {
 
           if (updateResult.success) {
             finalBillAmount = pricingInfo.adjustedCharge;
-            // Update the exit result with the new bill amount
             result.data.billAmt = finalBillAmount;
           } else {
             console.warn('Bill update failed, using dynamic price anyway:', updateResult);
-            // Still use dynamic price in UI even if backend update fails
             finalBillAmount = pricingInfo.adjustedCharge;
             result.data.billAmt = finalBillAmount;
           }
         } catch (updateError) {
           console.error('Failed to update bill with dynamic pricing:', updateError);
-          // Still use dynamic price in UI even if backend update fails due to CORS
           console.log('Using dynamic pricing in UI despite backend update failure');
           finalBillAmount = pricingInfo.adjustedCharge;
           result.data.billAmt = finalBillAmount;
@@ -147,17 +138,13 @@ export default function ExitPage() {
 
   return (
     <div style={containerStyle}>
-      {/* Error and Success Notifications */}
       <ErrorNotification message={error} onClose={() => setError("")} />
       <SuccessNotification message={successMessage} onClose={() => setSuccessMessage("")} />
 
       <div style={cardStyle}>
         <h1 style={titleStyle}>Vehicle Exit</h1>
-
-        {/* Search Form */}
         {searchMode && !exitResult && (
           <>
-            {/* OCR Component */}
             <div style={sectionStyle}>
               <h3>Scan Vehicle Number Plate</h3>
               <p style={hintTextStyle}>Scan to auto-fill registration number below</p>
@@ -193,7 +180,6 @@ export default function ExitPage() {
           </>
         )}
 
-        {/* Vehicle Information */}
         {vehicleInfo && !exitResult && (
           <div style={vehicleInfoStyle}>
             <h2 style={infoTitleStyle}>Vehicle Information</h2>
@@ -238,7 +224,6 @@ export default function ExitPage() {
               </div>
             </div>
 
-            {/* Dynamic Pricing Information */}
             {calculatingPrice && (
               <div style={pricingLoadingStyle}>
                 <p>Calculating dynamic pricing...</p>
@@ -308,7 +293,6 @@ export default function ExitPage() {
           </div>
         )}
 
-        {/* Exit Result / Bill */}
         {exitResult && (
           <div style={successStyle}>
             <h2 style={successTitleStyle}>Exit Successful!</h2>
@@ -403,7 +387,6 @@ export default function ExitPage() {
   );
 }
 
-// Helper function to calculate parking duration
 function calculateDuration(startTime, endTime = null) {
   const start = new Date(startTime);
   const end = endTime ? new Date(endTime) : new Date();
@@ -415,7 +398,7 @@ function calculateDuration(startTime, endTime = null) {
   return `${hours}h ${minutes}m`;
 }
 
-// Styles
+
 const containerStyle = {
   padding: "20px",
   maxWidth: "800px",
