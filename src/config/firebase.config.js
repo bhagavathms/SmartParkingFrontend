@@ -1,8 +1,3 @@
-/**
- * Firebase Configuration
- * Initialize and export Firebase app and auth instances
- */
-
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
@@ -15,7 +10,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
+
 let app;
 let auth;
 
