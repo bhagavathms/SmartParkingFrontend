@@ -1,8 +1,3 @@
-/**
- * Parking Context
- * Provides global parking state and methods
- */
-
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import parkingService from '../services/parkingService';
 import parkingLotService from '../services/parkingLotService';
@@ -23,7 +18,6 @@ export const ParkingProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch all parking lots
   const fetchParkingLots = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -43,7 +37,6 @@ export const ParkingProvider = ({ children }) => {
     }
   }, []);
 
-  // Park a vehicle
   const parkVehicle = async (vehicleType, vehicleRegistration) => {
     setLoading(true);
     setError(null);
@@ -63,7 +56,6 @@ export const ParkingProvider = ({ children }) => {
     }
   };
 
-  // Exit a vehicle
   const exitVehicle = async (vehicleRegistration) => {
     setLoading(true);
     setError(null);
@@ -83,7 +75,6 @@ export const ParkingProvider = ({ children }) => {
     }
   };
 
-  // Get vehicle status
   const getVehicleStatus = async (vehicleRegistration) => {
     setLoading(true);
     setError(null);
@@ -103,7 +94,7 @@ export const ParkingProvider = ({ children }) => {
     }
   };
 
-  // Create parking lot
+  
   const createParkingLot = async (name, address, totalFloors) => {
     setLoading(true);
     setError(null);
