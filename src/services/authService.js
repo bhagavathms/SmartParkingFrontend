@@ -1,8 +1,3 @@
-/**
- * Authentication Service
- * Handles Firebase authentication and backend auth endpoints
- */
-
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -17,14 +12,9 @@ import apiClient from './apiClient';
 import API_CONFIG from '../config/api.config';
 
 const authService = {
-  /**
-   * Register new user with email and password
-   */
   async register(email, password, displayName) {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-      // Update profile with display name
       if (displayName) {
         await updateProfile(userCredential.user, { displayName });
       }
@@ -45,9 +35,6 @@ const authService = {
     }
   },
 
-  /**
-   * Login with email and password
-   */
   async login(email, password) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -67,9 +54,6 @@ const authService = {
     }
   },
 
-  /**
-   * Login with Google
-   */
   async loginWithGoogle() {
     try {
       const provider = new GoogleAuthProvider();
@@ -90,9 +74,6 @@ const authService = {
     }
   },
 
-  /**
-   * Logout current user
-   */
   async logout() {
     try {
       await signOut(auth);
@@ -110,9 +91,6 @@ const authService = {
     }
   },
 
-  /**
-   * Send password reset email
-   */
   async resetPassword(email) {
     try {
       await sendPasswordResetEmail(auth, email);
@@ -130,9 +108,6 @@ const authService = {
     }
   },
 
-  /**
-   * Get current authenticated user info from backend
-   */
   async getCurrentUser() {
     try {
       const response = await apiClient.get(API_CONFIG.ENDPOINTS.AUTH.ME);
@@ -148,9 +123,6 @@ const authService = {
     }
   },
 
-  /**
-   * Get user by Firebase UID
-   */
   async getUserByUid(uid) {
     try {
       const response = await apiClient.get(`${API_CONFIG.ENDPOINTS.AUTH.USER}/${uid}`);
@@ -166,9 +138,6 @@ const authService = {
     }
   },
 
-  /**
-   * Verify authentication token
-   */
   async verifyToken() {
     try {
       const response = await apiClient.post(API_CONFIG.ENDPOINTS.AUTH.VERIFY_TOKEN);
@@ -184,16 +153,12 @@ const authService = {
     }
   },
 
-  /**
-   * Get current Firebase user (local)
-   */
+ 
   getCurrentFirebaseUser() {
     return auth.currentUser;
   },
 
-  /**
-   * Get user's ID token
-   */
+  
   async getIdToken() {
     try {
       if (auth.currentUser) {
@@ -206,9 +171,7 @@ const authService = {
     }
   },
 
-  /**
-   * Convert Firebase error codes to user-friendly messages
-   */
+ 
   getErrorMessage(errorCode) {
     const errorMessages = {
       'auth/invalid-email': 'Invalid email address',
