@@ -57,7 +57,6 @@ export default function ExitPage() {
       setVehicleInfo(result.data);
       setSearchMode(false);
 
-      // Calculate dynamic pricing
       setCalculatingPrice(true);
       const timeOut = new Date().toISOString();
       const pricingResult = await pricingService.getPricingPrediction(
