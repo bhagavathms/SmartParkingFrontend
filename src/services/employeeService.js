@@ -1,16 +1,7 @@
-/**
- * Employee Service
- * Handles employee CRUD operations
- */
-
 import apiClient from './apiClient';
 import API_CONFIG from '../config/api.config';
 
 const employeeService = {
-  /**
-   * Create a new employee
-   * @param {object} employeeData - Employee details
-   */
   async createEmployee(employeeData) {
     try {
       const response = await apiClient.post(
@@ -30,9 +21,6 @@ const employeeService = {
     }
   },
 
-  /**
-   * Get all employees
-   */
   async getAllEmployees() {
     try {
       const response = await apiClient.get(API_CONFIG.ENDPOINTS.EMPLOYEES.BASE);
@@ -48,10 +36,6 @@ const employeeService = {
     }
   },
 
-  /**
-   * Get employee by ID
-   * @param {string} empId - Employee ID
-   */
   async getEmployeeById(empId) {
     try {
       const response = await apiClient.get(
@@ -70,10 +54,6 @@ const employeeService = {
     }
   },
 
-  /**
-   * Get employee by email
-   * @param {string} email - Employee email
-   */
   async getEmployeeByEmail(email) {
     try {
       const response = await apiClient.get(
@@ -92,11 +72,6 @@ const employeeService = {
     }
   },
 
-  /**
-   * Update employee
-   * @param {string} empId - Employee ID
-   * @param {object} employeeData - Updated employee data
-   */
   async updateEmployee(empId, employeeData) {
     try {
       const response = await apiClient.put(
@@ -116,10 +91,6 @@ const employeeService = {
     }
   },
 
-  /**
-   * Delete employee
-   * @param {string} empId - Employee ID
-   */
   async deleteEmployee(empId) {
     try {
       const response = await apiClient.delete(
