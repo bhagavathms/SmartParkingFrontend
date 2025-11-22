@@ -16,10 +16,7 @@ export default function App() {
         <ParkingProvider>
           <Layout>
             <Routes>
-              {/* PUBLIC ROUTE */}
               <Route path="/" element={<Home />} />
-
-              {/* AFTER LOGIN ROUTES */}
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/entry" element={<EntryPage />} />
               <Route path="/exit" element={<ExitPage />} />
