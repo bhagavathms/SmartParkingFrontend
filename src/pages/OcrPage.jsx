@@ -8,10 +8,8 @@ export default function OcrPage() {
     <div style={pageStyle}>
       <h1>OCR Number Plate Detection</h1>
 
-      {/* OCR Component */}
       <OcrBox onDetected={(num) => setPlate(num)} />
 
-      {/* Display extracted number for testing */}
       {plate && (
         <div style={detectedBox}>
           <h2>Final Extracted Number:</h2>
@@ -22,7 +20,7 @@ export default function OcrPage() {
   );
 }
 
-// ---------- STYLES ----------
+
 const pageStyle = {
   padding: "20px",
   textAlign: "center",
