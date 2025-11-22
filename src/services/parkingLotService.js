@@ -1,18 +1,7 @@
-/**
- * Parking Lot Service
- * Handles parking lot and floor management operations
- */
-
 import apiClient from './apiClient';
 import API_CONFIG from '../config/api.config';
 
 const parkingLotService = {
-  /**
-   * Create a new parking lot
-   * @param {string} name - Parking lot name
-   * @param {string} address - Parking lot address
-   * @param {number} totalFloors - Total number of floors
-   */
   async createParkingLot(name, address, totalFloors) {
     try {
       const response = await apiClient.post(API_CONFIG.ENDPOINTS.PARKING_LOTS.BASE, {
@@ -33,9 +22,7 @@ const parkingLotService = {
     }
   },
 
-  /**
-   * Get all parking lots
-   */
+
   async getAllParkingLots() {
     try {
       const response = await apiClient.get(API_CONFIG.ENDPOINTS.PARKING_LOTS.BASE);
@@ -51,10 +38,6 @@ const parkingLotService = {
     }
   },
 
-  /**
-   * Get parking lot by ID
-   * @param {string} parkingLotId - Parking lot ID
-   */
   async getParkingLotById(parkingLotId) {
     try {
       const response = await apiClient.get(
@@ -73,12 +56,7 @@ const parkingLotService = {
     }
   },
 
-  /**
-   * Add a floor to parking lot
-   * @param {number} floorNo - Floor number
-   * @param {string} parkingLotId - Parking lot ID
-   * @param {object} slotConfiguration - Slot configuration {COMPACT: 10, STANDARD: 20, LARGE: 5}
-   */
+  
   async addFloor(floorNo, parkingLotId, slotConfiguration) {
     try {
       const response = await apiClient.post(API_CONFIG.ENDPOINTS.PARKING_LOTS.FLOORS, {
@@ -99,10 +77,7 @@ const parkingLotService = {
     }
   },
 
-  /**
-   * Get floor by ID
-   * @param {string} floorId - Floor ID
-   */
+  
   async getFloorById(floorId) {
     try {
       const response = await apiClient.get(
@@ -121,10 +96,7 @@ const parkingLotService = {
     }
   },
 
-  /**
-   * Get all floors in a parking lot
-   * @param {string} parkingLotId - Parking lot ID
-   */
+  
   async getFloorsByParkingLotId(parkingLotId) {
     try {
       const response = await apiClient.get(
