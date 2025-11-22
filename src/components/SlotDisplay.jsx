@@ -1,8 +1,3 @@
-/**
- * SlotDisplay Component
- * Fetches and displays human-readable slot information
- */
-
 import React, { useState, useEffect } from 'react';
 import { parkingLotService } from '../services';
 
@@ -20,11 +15,11 @@ const SlotDisplay = ({ slotId, inline = false }) => {
       try {
         setLoading(true);
 
-        // Fetch all parking lots to find the slot
+        
         const lotsResult = await parkingLotService.getAllParkingLots();
 
         if (lotsResult.success && lotsResult.data) {
-          // Search through all floors in all lots
+          
           for (const lot of lotsResult.data) {
             const floorsResult = await parkingLotService.getFloorsByParkingLotId(lot.parkingLotId);
 
@@ -48,7 +43,7 @@ const SlotDisplay = ({ slotId, inline = false }) => {
                     }
                   });
 
-                  // Find our slot
+                  
                   for (const [type, typeSlots] of Object.entries(slotsByType)) {
                     const index = typeSlots.findIndex(s => s.slotId === slotId);
                     if (index !== -1) {
@@ -75,7 +70,7 @@ const SlotDisplay = ({ slotId, inline = false }) => {
           }
         }
 
-        // If slot not found, show abbreviated ID
+        
         setSlotInfo({
           slotNumber: slotId.substring(0, 8),
           floorNo: '?',
