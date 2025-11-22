@@ -1,8 +1,3 @@
-/**
- * Authentication Context
- * Provides global authentication state and methods
- */
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase.config';
@@ -24,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Listen to Firebase auth state changes
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
@@ -32,7 +27,6 @@ export const AuthProvider = ({ children }) => {
       setError(null);
 
       if (user) {
-        // Fetch user info from backend
         try {
           const response = await authService.getCurrentUser();
           if (response.success) {
