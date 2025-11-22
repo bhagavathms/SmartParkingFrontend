@@ -41,7 +41,6 @@ export default function Layout({ children }) {
 
       <Footer />
 
-      {/* LOGIN MODAL */}
       <LoginModal
         isOpen={showLogin}
         onClose={() => setShowLogin(false)}
@@ -51,7 +50,6 @@ export default function Layout({ children }) {
         }}
       />
 
-      {/* SIGNUP MODAL */}
       <SignupModal
         isOpen={showSignup}
         onClose={() => setShowSignup(false)}
