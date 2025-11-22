@@ -16,14 +16,14 @@ export default function ParkingLotView() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Redirect if not authenticated
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/");
     }
   }, [isAuthenticated, navigate]);
 
-  // Fetch parking lots on mount
+
   useEffect(() => {
     fetchParkingLots();
   }, []);
@@ -77,7 +77,7 @@ export default function ParkingLotView() {
     fetchSlots(floor.floorId);
   };
 
-  // Group slots by type and generate slot numbers
+
   const groupSlotsByType = () => {
     const grouped = {
       TWO_WHEELER: [],
@@ -94,7 +94,6 @@ export default function ParkingLotView() {
     return grouped;
   };
 
-  // Generate human-readable slot number
   const generateSlotNumber = (slotType, index, floorNo) => {
     const typeCode = {
       TWO_WHEELER: 'TW',
@@ -129,7 +128,6 @@ export default function ParkingLotView() {
 
       {!loading && floors.length > 0 && (
         <div style={contentStyle}>
-          {/* Floor Selector */}
           <div style={floorSelectorStyle}>
             <h3 style={selectorTitleStyle}>Select Floor</h3>
             {floors.map((floor) => (
@@ -148,7 +146,6 @@ export default function ParkingLotView() {
             ))}
           </div>
 
-          {/* Slots Display */}
           <div style={slotsContainerStyle}>
             {selectedFloor && (
               <div>
@@ -156,7 +153,7 @@ export default function ParkingLotView() {
                   Floor {selectedFloor.floorNo} - Parking Slots
                 </h2>
 
-                {/* Legend */}
+
                 <div style={legendStyle}>
                   <div style={legendItemStyle}>
                     <div style={{ ...slotBoxStyle, ...slotOccupiedStyle }}></div>
@@ -168,7 +165,6 @@ export default function ParkingLotView() {
                   </div>
                 </div>
 
-                {/* Two-Wheeler Slots */}
                 {groupedSlots.TWO_WHEELER.length > 0 && (
                   <div style={slotSectionStyle}>
                     <h3 style={slotTypeHeaderStyle}>
@@ -207,7 +203,6 @@ export default function ParkingLotView() {
                   </div>
                 )}
 
-                {/* Four-Wheeler Slots */}
                 {groupedSlots.FOUR_WHEELER.length > 0 && (
                   <div style={slotSectionStyle}>
                     <h3 style={slotTypeHeaderStyle}>
@@ -246,7 +241,6 @@ export default function ParkingLotView() {
                   </div>
                 )}
 
-                {/* Heavy Vehicle Slots */}
                 {groupedSlots.HEAVY_VEHICLE.length > 0 && (
                   <div style={slotSectionStyle}>
                     <h3 style={slotTypeHeaderStyle}>
@@ -299,7 +293,6 @@ export default function ParkingLotView() {
   );
 }
 
-// Styles
 const containerStyle = {
   padding: "20px",
   maxWidth: "1400px",
