@@ -19,7 +19,6 @@ export default function EntryPage() {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  // Redirect if not authenticated
   React.useEffect(() => {
     if (!isAuthenticated) {
       navigate("/");
@@ -27,13 +26,12 @@ export default function EntryPage() {
   }, [isAuthenticated, navigate]);
 
   const handleOcrDetection = (data) => {
-    // OcrBox component passes the plate number directly as a string
     const plateNumber = typeof data === 'string' ? data : data?.text;
 
     if (plateNumber) {
       const cleanedPlate = plateNumber.toUpperCase().replace(/\s+/g, "");
       setVehicleRegistration(cleanedPlate);
-      setOcrData({ text: cleanedPlate }); // Store in expected format for display
+      setOcrData({ text: cleanedPlate });
     }
   };
 
@@ -63,14 +61,12 @@ export default function EntryPage() {
 
   return (
     <div style={containerStyle}>
-      {/* Error and Success Notifications */}
       <ErrorNotification message={error} onClose={() => setError("")} />
       <SuccessNotification message={successMessage} onClose={() => setSuccessMessage("")} />
 
       <div style={cardStyle}>
         <h1 style={titleStyle}>Vehicle Entry</h1>
 
-        {/* OCR Component */}
         <div style={sectionStyle}>
           <h3>Scan Vehicle Number Plate</h3>
           <p style={hintTextStyle}>Scan to auto-fill registration number below</p>
@@ -85,7 +81,6 @@ export default function EntryPage() {
           )}
         </div>
 
-        {/* Manual Entry Form */}
         <form onSubmit={handleParkVehicle} style={formStyle}>
           <div style={formGroupStyle}>
             <label style={labelStyle}>Vehicle Type</label>
