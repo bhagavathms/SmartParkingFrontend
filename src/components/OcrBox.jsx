@@ -6,7 +6,7 @@ export default function OcrBox({ onDetected }) {
   const [error, setError] = useState("");
   const [plate, setPlate] = useState("");
 
-  // Extract valid Indian number plate (8–10 characters)
+  
   const extractPlate = (rawArray) => {
     if (!rawArray || !Array.isArray(rawArray)) return "";
 
@@ -21,7 +21,7 @@ export default function OcrBox({ onDetected }) {
     return "";
   };
 
-  // When user picks image
+ 
   const handleFile = (e) => {
     if (!e.target.files.length) return;
     const file = e.target.files[0];
@@ -33,7 +33,7 @@ export default function OcrBox({ onDetected }) {
     uploadToOCR(file);
   };
 
-  // Upload to HuggingFace FastAPI OCR backend
+  
   const uploadToOCR = async (file) => {
     try {
       setLoading(true);
@@ -98,7 +98,7 @@ export default function OcrBox({ onDetected }) {
   );
 }
 
-// ---------- STYLES ----------
+
 const boxStyle = {
   padding: "20px",
   background: "white",
