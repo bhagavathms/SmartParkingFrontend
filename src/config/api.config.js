@@ -1,8 +1,3 @@
-/**
- * API Configuration
- * Central configuration for all API endpoints and settings
- */
-
 const API_CONFIG = {
   // Base URLs
   BASE_URL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api',
