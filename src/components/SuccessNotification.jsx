@@ -1,8 +1,3 @@
-/**
- * Success Notification Component
- * Displays success messages in a dismissible toast notification
- */
-
 import React, { useEffect } from 'react';
 
 const SuccessNotification = ({ message, onClose, duration = 3000 }) => {
@@ -44,7 +39,6 @@ const SuccessNotification = ({ message, onClose, duration = 3000 }) => {
   );
 };
 
-// Styles
 const overlayStyle = {
   position: 'fixed',
   top: 0,
