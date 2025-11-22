@@ -1,8 +1,3 @@
-/**
- * Signup Modal Component
- * Modal for new user registration
- */
-
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import '../styles/modal.css';
