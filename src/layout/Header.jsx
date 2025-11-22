@@ -10,18 +10,14 @@ export default function Header({
 }) {
   return (
     <header style={headerStyle}>
-      {/* LEFT - Logo */}
       <div style={{ display: "flex", alignItems: "center" }}>
         <img src="./assets/logo.png" alt="logo" style={{ width: "40px" }} />
-        {/* <img src="logo.png" alt="logo" style={{ width: "40px", marginRight: "10px" }} /> */}
       </div>
 
-      {/* CENTER - App Name */}
       <h2 style={{ flex: 1, textAlign: "center", margin: 0 }}>
         Smart Parking
       </h2>
 
-      {/* RIGHT - Buttons */}
       <div>
         {!isLoggedIn ? (
           <>
