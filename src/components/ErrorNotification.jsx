@@ -1,8 +1,3 @@
-/**
- * Error Notification Component
- * Displays error messages in a dismissible toast notification
- */
-
 import React, { useEffect } from 'react';
 
 const ErrorNotification = ({ message, onClose, duration = 5000 }) => {
@@ -45,7 +40,7 @@ const ErrorNotification = ({ message, onClose, duration = 5000 }) => {
   );
 };
 
-// Styles
+
 const overlayStyle = {
   position: 'fixed',
   top: 0,
@@ -136,7 +131,7 @@ const progressBarStyle = (duration) => ({
 
 export default ErrorNotification;
 
-// Add keyframe animations via style tag
+
 if (typeof document !== 'undefined' && !document.getElementById('error-notification-styles')) {
   const style = document.createElement('style');
   style.id = 'error-notification-styles';
