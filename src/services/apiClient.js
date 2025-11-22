@@ -1,14 +1,6 @@
-/**
- * API Client
- * Centralized HTTP client with automatic token injection and error handling
- */
-
 import API_CONFIG from '../config/api.config';
 import { auth } from '../config/firebase.config';
 
-/**
- * API Response wrapper
- */
 class ApiResponse {
   constructor(success, data, message, error) {
     this.success = success;
@@ -18,9 +10,6 @@ class ApiResponse {
   }
 }
 
-/**
- * Get current user's Firebase ID token
- */
 const getAuthToken = async () => {
   try {
     if (auth?.currentUser) {
@@ -34,18 +23,14 @@ const getAuthToken = async () => {
   }
 };
 
-/**
- * Main API Client class
- */
+
 class ApiClient {
   constructor(baseURL = API_CONFIG.BASE_URL) {
     this.baseURL = baseURL;
     this.timeout = API_CONFIG.TIMEOUT;
   }
 
-  /**
-   * Build request headers with authentication token
-   */
+ 
   async buildHeaders(customHeaders = {}) {
     const headers = {
       'Content-Type': 'application/json',
@@ -60,9 +45,7 @@ class ApiClient {
     return headers;
   }
 
-  /**
-   * Generic request handler
-   */
+  
   async request(endpoint, options = {}) {
     const url = `${this.baseURL}${endpoint}`;
     const headers = await this.buildHeaders(options.headers);
@@ -73,7 +56,7 @@ class ApiClient {
       ...options,
     };
 
-    // Add body if present and not GET request
+    
     if (options.body && config.method !== 'GET') {
       config.body = JSON.stringify(options.body);
     }
@@ -99,34 +82,25 @@ class ApiClient {
       }
 
       if (!response.ok) {
-        // Extract user-friendly error message
         let errorMessage = data?.message || data || `HTTP ${response.status}: ${response.statusText}`;
-
-        // Handle long backend error messages - extract key info
         if (typeof errorMessage === 'string') {
-          // Check for unique constraint violation (duplicate vehicle)
           if (errorMessage.includes('Unique index or primary key violation') ||
               errorMessage.includes('VEHICLE_REGISTRATION')) {
             errorMessage = 'This vehicle is already parked. Please use a different registration number or exit the existing vehicle first.';
           }
-          // Check for "No available slot" error
           else if (errorMessage.includes('No available slot')) {
             errorMessage = 'No parking slots available for this vehicle type. Please try again later.';
           }
-          // Truncate very long error messages
           else if (errorMessage.length > 200) {
-            // Try to extract the first sentence or main error
             const firstLine = errorMessage.split('\n')[0];
             errorMessage = firstLine.length > 200 ? firstLine.substring(0, 200) + '...' : firstLine;
           }
         }
 
-        // Log error details for debugging (won't trigger error overlay)
         console.warn(`API Error [${config.method} ${endpoint}]:`, errorMessage);
         return new ApiResponse(false, null, errorMessage, new Error(errorMessage));
       }
 
-      // Handle backend's ApiResponse<T> format
       if (data && typeof data === 'object' && 'success' in data) {
         return new ApiResponse(data.success, data.data, data.message, null);
       }
@@ -143,9 +117,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * HTTP Methods
-   */
   async get(endpoint, options = {}) {
     return this.request(endpoint, { ...options, method: 'GET' });
   }
@@ -167,7 +138,6 @@ class ApiClient {
   }
 }
 
-// Export singleton instance
 const apiClient = new ApiClient();
 
 export default apiClient;
